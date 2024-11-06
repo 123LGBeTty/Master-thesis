@@ -1,10 +1,10 @@
 
 library(readxl)
-View(X02EN22_SP_Pia_better_noneg)
+View(X02EN22_SP_Pia_noneg)
 # load data
 library(readxl)  
 ##all data, without negative values (=noneg)
-EN22_SP_Pia <- read_excel("D:/Masterarbeit/Daten/02EN22_SP_Pia_better_noneg.xlsx") 
+EN22_SP_Pia <- read_excel("D:/Masterarbeit/Daten/02EN22_SP_Pia_noneg.xlsx") 
 ## load data with only one horizon 
 X02EN22_SP_Pia_onlyO <- read_excel("D:/Masterarbeit/Daten/02EN22_SP_Pia_onlyO_noneg.xlsx")  
 X02EN22_SP_Pia_onlyM <- read_excel ("D:/Masterarbeit/Daten/02EN22_SP_Pia_onlyM_noneg.xlsx")
@@ -214,7 +214,7 @@ kruskal.test(EN22_SP_Pia$`LMW_HLW`~EN22_SP_Pia$`Distance to mine`)
 
 # conduct PCA
 ## 1 and 2 dimension
-EN22_SP_Pia2 <- read_excel("D:/Masterarbeit/Daten/02EN22_SP_Pia_better_noneg.xlsx") 
+EN22_SP_Pia2 <- read_excel("D:/Masterarbeit/Daten/02EN22_SP_Pia_noneg.xlsx") 
 View(EN22_SP_Pia2)
 #### only numerical data
 pca_data <- EN22_SP_Pia2[, 40:54]                                                  
