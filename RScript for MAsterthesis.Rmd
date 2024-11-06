@@ -1,6 +1,5 @@
 
 library(readxl)
-
 View(X02EN22_SP_Pia_better_noneg)
 # load data
 library(readxl)  
@@ -431,7 +430,7 @@ combined_plot
 combined_plot2 <- BaA / ipy  +  plot_layout(ncol = 1, heights = c(1, 1, 1))
 combined_plot2
 
-##boxplots of distance
+##boxplots of distance 
 library(ggplot2)
 library(tidyr)
 library(dplyr)
@@ -464,13 +463,13 @@ ggplot(EN22_SP_Pia_long, aes(x = factor(distance_category), y = value)) +
     strip.text = element_text(size = 12, family = "Calibri")  
   )
     
-### also done with sum and ratio
-# Notwendige Bibliotheken laden
+### distance boxplots for diagnostic ratios
+
 library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-# Daten in Long-Format umwandeln und die Variablen in der gewünschten Reihenfolge als Faktor definieren
+# transform to long data
 EN22_SP_Pia_long_extra <- EN22_SP_Pia %>%
   pivot_longer(
     cols = c(Sum, LMW_HLW, `Ant_Ant+Phe`, `Ipy_Ipy+Bpe`, `Fla_Fla+Py`, `BaA_BaA+Chr`),
@@ -493,7 +492,10 @@ ggplot(EN22_SP_Pia_long_extra, aes(x = factor(distance_category), y = value)) +
     plot.title = element_text(size = 14, face = "bold", family = "Calibri"),
     strip.text = element_text(size = 12, family = "Calibri")
   )
-###also with only O and only M samples
+
+### conduct with distance data with only O and only M samples
+#transform data frame to long
+
 EN22_SP_Pia_longO <- X02EN22_SP_Pia_onlyO %>%
   pivot_longer(
     cols = c(Nap, Acy, Ace, Fle, Phe, Ant, Fla, Py, BaA, Chr, BbF, BaP, Ipy, BPe, DahA),
@@ -513,7 +515,7 @@ EN22_SP_Pia_longM <- X02EN22_SP_Pia_onlyM %>%
                                       "Fla", "Py", "BaA", "Chr", "BbF", "BaP", 
                                       "Ipy", "BPe", "DahA")))                                      
 
-### facet wrap multiple distance boxplots in a 3x5 raster only O and only M 
+### distance boxplots for one horizon in 3x5 frame for PAH and diagnostic ratio
 
 ggplot(EN22_SP_Pia_longO, aes(x = factor(distance_category), y = value)) +
   geom_boxplot() +
@@ -589,7 +591,7 @@ ggplot(EN22_SP_Pia_long_extraM, aes(x = factor(distance_category), y = value)) +
     strip.text = element_text(size = 12, family = "Calibri")
     )
     
-##boxplots of age
+## boxplots of age
 
 ### PAH-Variables as factor 
 EN22_SP_Pia_long <- EN22_SP_Pia %>%
@@ -695,6 +697,7 @@ ggplot(EN22_SP_Pia_long_extraM, aes(x = factor(age_category), y = value)) +
     plot.title = element_text(size = 14, face = "bold", family = "Calibri"),
     strip.text = element_text(size = 12, family = "Calibri")
     )  
+
 ##boxplots of horizons  
 ### PAH-Variables as factor 
 EN22_SP_Pia_long <- EN22_SP_Pia %>%
@@ -726,7 +729,6 @@ ggplot(EN22_SP_Pia_long, aes(x = factor(horizon, levels = c("L", "O", "M")), y =
     )
   
 ### with diagnostic ratios
-# Facettierten Boxplot mit 2 Zeilen und 3 Spalten erstellen
 
 ggplot(EN22_SP_Pia_long_extra, aes(x = factor(horizon, levels = c("L", "O", "M")), y = value)) +
   geom_boxplot(aes(fill = factor(horizon))) +
