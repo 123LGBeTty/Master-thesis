@@ -19,15 +19,15 @@ shapiro.test( EN22_SP_Pia$Ace)
 shapiro.test( EN22_SP_Pia$Fle) 
 shapiro.test( EN22_SP_Pia$Phe) 
 shapiro.test( EN22_SP_Pia$Ant) 
-shapiro.test( EN22_SP_Pia$Fla) 
-shapiro.test( EN22_SP_Pia$Py) 
-shapiro.test( EN22_SP_Pia$BaA) 
-shapiro.test( EN22_SP_Pia$Chr) 
-shapiro.test( EN22_SP_Pia$BbF) 
-shapiro.test( EN22_SP_Pia$BaP) 
-shapiro.test( EN22_SP_Pia$Ipy) 
-shapiro.test( EN22_SP_Pia$BPe) 
-shapiro.test( EN22_SP_Pia$DahA) 
+shapiro.test( EN22_SP_Pia$Fla*) 
+shapiro.test( EN22_SP_Pia$Py*) 
+shapiro.test( EN22_SP_Pia$BaA*) 
+shapiro.test( EN22_SP_Pia$Chr*) 
+shapiro.test( EN22_SP_Pia$BbF*) 
+shapiro.test( EN22_SP_Pia$BaP*) 
+shapiro.test( EN22_SP_Pia$Ipy*) 
+shapiro.test( EN22_SP_Pia$BPe*) 
+shapiro.test( EN22_SP_Pia$DahA*) 
 shapiro.test( EN22_SP_Pia$Sum) 
 shapiro.test( EN22_SP_Pia$`LMW_HLW`) 
 shapiro.test( EN22_SP_Pia$`Fla_Fla+Py`)
@@ -42,15 +42,15 @@ kruskal.test(EN22_SP_Pia$Ace~EN22_SP_Pia$horizon)
 kruskal.test(EN22_SP_Pia$Fle~EN22_SP_Pia$horizon)
 kruskal.test(EN22_SP_Pia$Phe~EN22_SP_Pia$horizon)
 kruskal.test(EN22_SP_Pia$Ant~EN22_SP_Pia$horizon)
-kruskal.test(EN22_SP_Pia$Fla~EN22_SP_Pia$horizon)
-kruskal.test(EN22_SP_Pia$Py~EN22_SP_Pia$horizon)
-kruskal.test(EN22_SP_Pia$BaA~EN22_SP_Pia$horizon)
-kruskal.test(EN22_SP_Pia$Chr~EN22_SP_Pia$horizon)
-kruskal.test(EN22_SP_Pia$BbF~EN22_SP_Pia$horizon)
-kruskal.test(EN22_SP_Pia$BaP~EN22_SP_Pia$horizon)
-kruskal.test(EN22_SP_Pia$Ipy~EN22_SP_Pia$horizon)
-kruskal.test(EN22_SP_Pia$BPe~EN22_SP_Pia$horizon)
-kruskal.test(EN22_SP_Pia$DahA~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$Fla*~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$Py*~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$BaA*~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$Chr*~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$BbF*~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$BaP*~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$Ipy*~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$BPe*~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$DahA*~EN22_SP_Pia$horizon)
 
 kruskal.test(EN22_SP_Pia$`LMW_HLW`~EN22_SP_Pia$horizon)
 kruskal.test(EN22_SP_Pia$`Ant_Ant+Phe`~EN22_SP_Pia$horizon)
@@ -66,14 +66,14 @@ kruskal.test(EN22_SP_Pia$Ace~EN22_SP_Pia$distance_category)
 kruskal.test(EN22_SP_Pia$Fle~EN22_SP_Pia$distance_category)
 kruskal.test(EN22_SP_Pia$Phe~EN22_SP_Pia$distance_category)
 kruskal.test(EN22_SP_Pia$Ant~EN22_SP_Pia$distance_category)
-kruskal.test(EN22_SP_Pia$Fla~EN22_SP_Pia$distance_category)
-kruskal.test(EN22_SP_Pia$Py~EN22_SP_Pia$distance_category)
-kruskal.test(EN22_SP_Pia$BaA~EN22_SP_Pia$distance_category)
-kruskal.test(EN22_SP_Pia$Chr~EN22_SP_Pia$distance_category)
-kruskal.test(EN22_SP_Pia$BbF~EN22_SP_Pia$distance_category)
-kruskal.test(EN22_SP_Pia$BaP~EN22_SP_Pia$distance_category)
-kruskal.test(EN22_SP_Pia$Ipy~EN22_SP_Pia$distance_category)
-kruskal.test(EN22_SP_Pia$DahA~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$Fla*~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$Py*~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$BaA*~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$Chr*~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$BbF*~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$BaP*~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$Ipy*~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$DahA*~EN22_SP_Pia$distance_category)
 
 kruskal.test(EN22_SP_Pia$LMW_HLW~EN22_SP_Pia$distance_category)
 kruskal.test(EN22_SP_Pia$`Ant_Ant+Phe`~EN22_SP_Pia$distance_category)
@@ -93,14 +93,14 @@ kruskal.test(EN22_SP_Pia$Ace~EN22_SP_Pia$age_category)
 kruskal.test(EN22_SP_Pia$Fle~EN22_SP_Pia$age_category)
 kruskal.test(EN22_SP_Pia$Phe~EN22_SP_Pia$age_category)
 kruskal.test(EN22_SP_Pia$Ant~EN22_SP_Pia$age_category)
-kruskal.test(EN22_SP_Pia$Fla~EN22_SP_Pia$age_category)
-kruskal.test(EN22_SP_Pia$Py~EN22_SP_Pia$age_category)
-kruskal.test(EN22_SP_Pia$BaA~EN22_SP_Pia$age_category)
-kruskal.test(EN22_SP_Pia$Chr~EN22_SP_Pia$age_category)
-kruskal.test(EN22_SP_Pia$BbF~EN22_SP_Pia$age_category)
-kruskal.test(EN22_SP_Pia$BaP~EN22_SP_Pia$age_category)
-kruskal.test(EN22_SP_Pia$Ipy~EN22_SP_Pia$age_category)
-kruskal.test(EN22_SP_Pia$DahA~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$Fla*~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$Py*~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$BaA*~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$Chr*~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$BbF*~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$BaP*~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$Ipy*~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$DahA*~EN22_SP_Pia$age_category)
 
 kruskal.test(EN22_SP_Pia$LMW_HLW~EN22_SP_Pia$age_category)
 kruskal.test(EN22_SP_Pia$`Ant_Ant+Phe`~EN22_SP_Pia$age_category)
@@ -123,15 +123,15 @@ dunn_test(Ace~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 dunn_test(Fle~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 dunn_test(Phe~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 dunn_test(Ant~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(Fla~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(Py~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(BaA~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(Chr~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(BbF~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(BaP~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(Ipy~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(BPe~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(DahA~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Fla*~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Py*~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BaA*~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Chr*~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BbF*~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BaP*~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Ipy*~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BPe*~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(DahA*~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 
 dunn_test(LMW_HLW~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 dunn_test(`Ant_Ant+Phe`~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
@@ -147,14 +147,14 @@ dunn_test(Ace~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni
 dunn_test(Fle~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 dunn_test(Phe~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 dunn_test(Ant~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(Fla~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(Py~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(BaA~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(Chr~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(BbF~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(BaP~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(Ipy~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(DahA~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Fla*~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Py*~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BaA*~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Chr*~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BbF*~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BaP*~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Ipy*~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(DahA*~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 
 dunn_test(LMW_HLW~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 dunn_test(`Ant_Ant+Phe`~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
@@ -170,14 +170,14 @@ dunn_test(Ace~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 dunn_test(Fle~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 dunn_test(Phe~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 dunn_test(Ant~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(Fla~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(Py~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(BaA~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(Chr~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(BbF~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(BaP~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(Ipy~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
-dunn_test(DahA~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Fla*~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Py*~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BaA*~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Chr*~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BbF*~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BaP*~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Ipy*~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(DahA*~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 
 dunn_test(LMW_HLW~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 dunn_test(`Ant_Ant+Phe`~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
@@ -471,7 +471,7 @@ library(tidyverse)
 ### PAH-Variables as factor 
 EN22_SP_Pia_long <- EN22_SP_Pia %>%
   pivot_longer(
-    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, Fla, Py, BaA, Chr, BbF, BaP, Ipy, BPe, DahA),
+    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, Fla*, Py*, BaA*, Chr*, BbF*, BaP*, Ipy*, BPe*, DahA*),
     names_to = "PAH",
     values_to = "value"
   ) %>%
@@ -530,7 +530,7 @@ ggplot(EN22_SP_Pia_long_extra, aes(x = factor(distance_category), y = value)) +
 
 EN22_SP_Pia_longO <- X02EN22_SP_Pia_onlyO %>%
   pivot_longer(
-    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, Fla, Py, BaA, Chr, BbF, BaP, Ipy, BPe, DahA),
+    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, Fla*, Py*, BaA*, Chr*, BbF*, BaP*, Ipy*, BPe*, DahA*),
     names_to = "PAH",
     values_to = "value"
   ) %>%
@@ -539,7 +539,7 @@ EN22_SP_Pia_longO <- X02EN22_SP_Pia_onlyO %>%
                                       "Ipy", "BPe", "DahA")))
 EN22_SP_Pia_longM <- X02EN22_SP_Pia_onlyM %>%
   pivot_longer(
-    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, Fla, Py, BaA, Chr, BbF, BaP, Ipy, BPe, DahA),
+    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, Fla*, Py*, BaA*, Chr*, BbF*, BaP*, Ipy*, BPe*, DahA*),
     names_to = "PAH",
     values_to = "value"
   ) %>%
@@ -628,7 +628,7 @@ ggplot(EN22_SP_Pia_long_extraM, aes(x = factor(distance_category), y = value)) +
 ### PAH-Variables as factor 
 EN22_SP_Pia_long <- EN22_SP_Pia %>%
   pivot_longer(
-    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, Fla, Py, BaA, Chr, BbF, BaP, Ipy, BPe, DahA),
+    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, Fla*, Py*, BaA*, Chr*, BbF*, BaP*, Ipy*, BPe*, DahA*),
     names_to = "PAH",
     values_to = "value"
   ) %>%
@@ -734,7 +734,7 @@ ggplot(EN22_SP_Pia_long_extraM, aes(x = factor(age_category), y = value)) +
 ### PAH-Variables as factor 
 EN22_SP_Pia_long <- EN22_SP_Pia %>%
   pivot_longer(
-    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, Fla, Py, BaA, Chr, BbF, BaP, Ipy, BPe, DahA),
+    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, Fla*, Py*, BaA*, Chr*, BbF*, BaP*, Ipy*, BPe*, DahA*),
     names_to = "PAH",
     values_to = "value"
   ) %>%
