@@ -1,0 +1,748 @@
+
+library(readxl)
+
+View(X02EN22_SP_Pia_better_noneg)
+# load data
+library(readxl)  
+##all data, without negative values
+EN22_SP_Pia <- read_excel("D:/Masterarbeit/Daten/02EN22_SP_Pia_better_noneg.xlsx") 
+## load data with only one horizon 
+X02EN22_SP_Pia_onlyO <- read_excel("D:/Masterarbeit/Daten/02EN22_SP_Pia_onlyO_noneg.xlsx")  
+X02EN22_SP_Pia_onlyM <- read_excel ("D:/Masterarbeit/Daten/02EN22_SP_Pia_onlyM_noneg.xlsx")
+
+# tests for normal distribution (Pearson or Shapiro) if significant it is not normal distributed
+install.packages( "nortest")
+library( nortest)
+
+shapiro.test( EN22_SP_Pia$Nap) # signifikant
+shapiro.test( EN22_SP_Pia$Acy) # signifikant
+shapiro.test( EN22_SP_Pia$Ace) # signifikant
+shapiro.test( EN22_SP_Pia$Fle) # signifikant
+shapiro.test( EN22_SP_Pia$Phe) # signifikant
+shapiro.test( EN22_SP_Pia$Ant) # signifikant
+shapiro.test( EN22_SP_Pia$Fla) # signifikant
+shapiro.test( EN22_SP_Pia$Py) # signifikant
+shapiro.test( EN22_SP_Pia$BaA) # signifikant
+shapiro.test( EN22_SP_Pia$Chr) # signifikant
+shapiro.test( EN22_SP_Pia$BbF) # signifikant
+shapiro.test( EN22_SP_Pia$BaP) # signifikant
+shapiro.test( EN22_SP_Pia$Ipy) # signifikant
+shapiro.test( EN22_SP_Pia$BPe) # signifikant
+shapiro.test( EN22_SP_Pia$DahA) # signifikant
+
+# Kruskall wallis Test since data is not normal distributed, a non parametrical test is chosen
+## test each PAH, ratio and sum in relation to the horizon
+kruskal.test(EN22_SP_Pia$Nap~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$Acy~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$Ace~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$Fle~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$Phe~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$Ant~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$Fla~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$Py~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$BaA~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$Chr~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$BbF~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$BaP~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$Ipy~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$BPe~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$DahA~EN22_SP_Pia$horizon)
+
+kruskal.test(EN22_SP_Pia$`LMW_HLW`~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$`Ant_Ant+Phe`~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$`Fla_Fla+Py`~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$`BaA_BaA+Chr`~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$`Ipy_Ipy+Bpe`~EN22_SP_Pia$horizon)
+kruskal.test(EN22_SP_Pia$Sum~EN22_SP_Pia$horizon)
+
+## test each PAH, ratio and sum in relation to distance categories
+kruskal.test(EN22_SP_Pia$Nap~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$Acy~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$Ace~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$Fle~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$Phe~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$Ant~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$Fla~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$Py~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$BaA~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$Chr~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$BbF~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$BaP~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$Ipy~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$DahA~EN22_SP_Pia$distance_category)
+
+kruskal.test(EN22_SP_Pia$LMW_HLW~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$`Ant_Ant+Phe`~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$`Fla_Fla+Py`~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$`BaA_BaA+Chr`~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$`Ipy_Ipy+Bpe`~EN22_SP_Pia$distance_category)
+kruskal.test(EN22_SP_Pia$Sum~EN22_SP_Pia$distance_category)
+
+###check if there is a difference in horizons in distance category
+kruskal.test(X02EN22_SP_Pia_onlyO$LMW_HLW~X02EN22_SP_Pia_onlyO$distance_category) 
+kruskal.test(X02EN22_SP_Pia_onlyM$LMW_HLW~X02EN22_SP_Pia_onlyM$distance_category)   
+
+## test each PAH, ratio and sum in relation to age categories
+kruskal.test(EN22_SP_Pia$Nap~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$Acy~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$Ace~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$Fle~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$Phe~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$Ant~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$Fla~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$Py~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$BaA~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$Chr~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$BbF~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$BaP~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$Ipy~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$DahA~EN22_SP_Pia$age_category)
+
+kruskal.test(EN22_SP_Pia$LMW_HLW~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$`Ant_Ant+Phe`~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$`Fla_Fla+Py`~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$`BaA_BaA+Chr`~EN22_SP_Pia$age_category)
+### check if there is a difference in horizons in age category
+kruskal.test(X02EN22_SP_Pia_onlyO$LMW_HLW~X02EN22_SP_Pia_onlyO$age_category)
+#### -> not significant no further testing needed
+kruskal.test(X02EN22_SP_Pia_onlyM$LMW_HLW~X02EN22_SP_Pia_onlyM$age_category)  
+#### -> not significant 
+
+# post-hoc test to see where the significant difference lies
+install.packages("rstatix")
+library(rstatix)
+
+## for horizon
+dunn_test(Nap~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Acy~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Ace~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Fle~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Phe~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Ant~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Fla~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Py~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BaA~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Chr~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BbF~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BaP~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Ipy~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BPe~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(DahA~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+
+dunn_test(LMW_HLW~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(`Ant_Ant+Phe`~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(`Fla_Fla+Py`~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(`Ipy_Ipy+Bpe`~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Sum~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+
+## for distance category
+dunn_test(Nap~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Acy~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Ace~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Fle~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Phe~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Ant~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Fla~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Py~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BaA~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Chr~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BbF~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BaP~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Ipy~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(DahA~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+
+dunn_test(LMW_HLW~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(`Ant_Ant+Phe`~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(`Fla_Fla+Py`~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(`BaA_BaA+Chr`~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(`Ipy_Ipy+Bpe`~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Sum~distance_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+
+## for age category
+dunn_test(Nap~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Acy~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Ace~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Fle~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Phe~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Ant~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Fla~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Py~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BaA~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Chr~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BbF~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(BaP~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Ipy~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(DahA~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+
+dunn_test(LMW_HLW~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(`Ant_Ant+Phe`~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(`Fla_Fla+Py`~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(`BaA_BaA+Chr`~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(`Ipy_Ipy+Bpe`~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(Sum~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+
+
+# PCA
+## 1 and 2 dimension
+EN22_SP_Pia2 <- read_excel("D:/Masterarbeit/Daten/02EN22_SP_Pia_better_noneg.xlsx") 
+View(EN22_SP_Pia2)
+#### only numerical data
+pca_data <- EN22_SP_Pia2[, 40:54]                                                  
+#### standardize data
+pca_scaled <- scale(pca_data)                                                     
+View(pca_scaled)
+
+#### conduct PCA
+pca_result <- prcomp(pca_scaled, center = TRUE, scale. = TRUE)                    
+summary(pca_result)
+#### Eigenwerte (standard deviation of principal components)
+pca_result$sdev                                                                   
+
+#### Proportion of explained variance
+explained_variance <- pca_result$sdev^2 / sum(pca_result$sdev^2)                 
+explained_variance
+#### Ladeings (weight of variables)
+pca_result$rotatio                                                                
+
+### data illustration
+library(ggplot2)
+#### PCA Scores
+pca_scores <- as.data.frame(pca_result$x)                                        
+#### Scatterplot of the first two principal components
+ggplot(pca_scores, aes(x = PC1, y = PC2)) +                                       
+  geom_point(size = 3) +
+  labs(title = "PCA der pca-Daten",
+       x = "Hauptkomponente 1",
+       y = "Hauptkomponente 2") +
+  theme_minimal()
+
+#### create Biplot and Scree Plot
+biplot(pca_result)                                                                
+screeplot(pca_result, type = "lines", main = "Scree Plot")
+
+#### Eigenwerte Plo
+install.packages("factoextra")
+library(factoextra)
+fviz_eig(pca_result) 
+
+#### PCA Biplot with ellipse
+fviz_pca_biplot(pca_result, label = "var",
+                repel = TRUE,
+                habillage = EN22_SP_Pia$horizon,
+                palette = c("darkgreen", "blue", "orange"),
+                geom.ind = "point",
+                pointshape = 19) +
+                theme(text = element_text(family = "Calibri", size = 12)) +
+                labs(color = NULL) 
+               # addEllipses = TRUE, ellipse.level = 0.95)   
+                
+## 2 and 3 dimension
+### Extract PC-Scores
+pca_scores <- pca_result$x 
+
+### choose second main component
+pc2_scores <- pca_scores[, 2]         
+
+plot(pc2_scores, type = "b", main = "Scores dof second main component (PC2)",  
+     xlab = "observations", ylab = "PC2-Wert")
+
+pc2_loadings <- pca_result$rotation[, 2]  
+
+barplot(pc2_loadings, main = "Einfluss der Variablen auf PC2",                    
+        xlab = "Variablen", ylab = "PC2-Ladung", las = 2)
+biplot(pca_result, choices = c(2, 3), main = "PCA-Biplot: PC2 vs. PC3")
+
+### data illustration
+EN22_SP_Pia2$horizon <- factor(EN22_SP_Pia$horizon, levels = c("L", "O", "M"))
+
+fviz_pca_biplot(pca_result,                                                      
+                axes = c(2, 3),                                                   
+                label = "var",                                                    
+                repel = TRUE,
+                habillage = EN22_SP_Pia$horizon,
+                palette = c("darkgreen", "blue", "orange"),
+                geom.ind = "point",
+                pointshape = 19)+
+               #addEllipses = TRUE, ellipse.level = 0.95) +                             
+  theme(text = element_text(family = "Calibri", size = 12)) +
+  labs(color = NULL) 
+  
+# Graphics
+## abundance overview
+
+### Packages needed
+library(readxl)
+install.packages("ggplot2")
+library(ggplot2)
+library(dplyr)
+install.packages("ggtext")
+library(ggtext)
+
+### upload data in necessary column style 
+EN22_SP_Pia_saeulen <- read_excel("D:/Masterarbeit/Daten/02EN22_SP_Pia_saeulen_noneg.xlsx")
+EN22_SP_Pia_saeulen$combination <- interaction(EN22_SP_Pia_saeulen$plot, EN22_SP_Pia_saeulen$horizon)  #add a new column with combination of plot and horizon
+### decide on sorting order (e.g. 'year since fire')
+sorted_levels <- unique(EN22_SP_Pia_saeulen$combination[order(EN22_SP_Pia_saeulen$`year since fire`)])
+
+### define special plots which can then be put to a certain place
+special_plots <- c("55.L","55.wood", "55.charcoal", "55.bark", "55.ash")
+
+### create levels with all plots which are not a part of the special plots
+sorted_levels <- setdiff(sorted_levels, special_plots)
+
+### set the order of plots, first special plots then sorted levels
+EN22_SP_Pia_saeulen$combination <- factor(EN22_SP_Pia_saeulen$combination, 
+                                          levels = c(special_plots, sorted_levels))
+
+### define colours for horizons
+horizon_colors <- c("L" = "green4", "O" = "blue", "M" = "orange", 
+                    "ash" = "darkgreen", "bark" = "darkgreen", 
+                    "charcoal" = "darkgreen", "wood" = "darkgreen")
+
+#### Draw diagram
+ggplot(EN22_SP_Pia_saeulen, aes(x = combination, y=value, fill = PAH)) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(title = "Abundance of PAH",
+       x = "sorted by year since fire event",
+       y = "ng/g") +
+  geom_hline(yintercept = 500, linetype = "dashed", color = "red") +
+  scale_x_discrete(labels = function(x) {
+    sapply(x, function(label) {
+      # Hol den passenden Horizont für jedes Label
+      horiz <- EN22_SP_Pia_saeulen$horizon[which(EN22_SP_Pia_saeulen$combination == label)[1]]
+      # Färbe das Label nach dem Horizont ein
+      paste0('<span style="color:', horizon_colors[horiz], ';">', label, '</span>')
+    })
+  }) +
+  theme_minimal() +
+  theme(axis.title.x = element_blank(),
+        axis.text.x = element_markdown(angle = 45, hjust = 1),  # Verwende element_markdown
+        axis.ticks.x = element_blank(),
+        text = element_text(family = "Calibri", size = 12),     # Schriftart und Schriftgröße allgemein
+        axis.title = element_text(family = "Calibri", size = 14),  # Achsentitel
+        axis.text = element_text(family = "Calibri", size = 10),   # Achsentext
+        plot.title = element_text(family = "Calibri", size = 16, face = "bold"))  # Diagrammtitel
+
+        
+## ratio diagram
+install.packages("ggplot2")   
+library(ggplot2)
+install.packages("patchwork")
+library(patchwork)
+install.packages("ggrepel")
+library(ggrepel)
+
+### create single ratio diagrams
+lmw <- ggplot(EN22_SP_Pia, aes(x= `Fla_Fla+Py`, y= LMW_HLW, col = horizon)) +   #set x and y axis
+  scale_y_continuous(labels = function(x) paste0(x, ""),                        # set the y axis scale
+  breaks = seq(0, 2.5, by = 0.5),                                               # with interval
+   limits = c(0, 2)) +                                                          # with beginning and end
+  geom_point()+                                                                 # indicate what kind of graph it should be     
+  geom_vline(xintercept = 0.5, linetype = "dashed", color = "red")+             # insert a vertical line  
+  geom_text_repel(aes(label = paste(plot, sep = " ")),                          # repel is responsible for labels not colliding
+    vjust = -1, size = 3, show.legend = FALSE) +                                # no legend should be displayed
+  geom_hline (yintercept = 1,                                                   # insert horizontal line  
+              linetype = "dashed",
+              color = "red") +  
+  theme_minimal() + theme(axis.title.x = element_blank(),
+              axis.text.x = element_blank(),
+              axis.ticks.x = element_blank(),
+   text = element_text(family = "Calibri"),                                     # Font is Calibri 
+   plot.title = element_text(size = 14),                                        # adapt size of title
+   axis.title = element_text(size = 12),                                        # adapt size of axis titles
+   axis.text = element_text(size = 10))+  
+   labs(color = "Horizons", x = "Fla_Fla+Py") +                                 # Legendentitel ändern
+   scale_color_manual(values = c("L" = "green4", "O" = "blue", "M" = "orange")) # colours for horizons are set here
+
+lmw                                                                             # check if it meets the requirements  
+
+BaA <- ggplot(EN22_SP_Pia, aes(x= `Fla_Fla+Py`, y= `BaA_BaA+Chr`, col = EN22_SP_Pia$horizon)) +
+  geom_point()+ 
+  scale_y_continuous(labels = function(x) paste0(x, ""),
+                     breaks = seq(0, 0.75, by = 0.25),
+                     limits = c(0, 0.75)) + 
+  geom_vline(xintercept = 0.5, linetype = "dashed", color = "red")+
+  geom_hline (yintercept = 0.35,             
+              linetype = "dashed",
+              color = "red") +  
+  geom_text_repel(aes(label = paste(plot, sep = " ")), vjust = -1, size = 3, show.legend = FALSE) +
+  geom_hline (yintercept = 0.2,             
+              linetype = "dashed",
+              color = "red") +  
+  geom_hline (yintercept = 0.5,             
+              linetype = "dashed",
+              color = "red") +  
+  theme_minimal() + theme(axis.title.x = element_blank(),
+                          axis.text.x = element_blank(),
+                          axis.ticks.x = element_blank(),
+                          legend.position = "none",
+                          text = element_text(family = "Calibri"),  
+                          plot.title = element_text(size = 14),     
+                          axis.title = element_text(size = 12),     
+                          axis.text = element_text(size = 10))+     
+  labs(color = "Horizons") +  # title of legend
+  scale_color_manual(values = c("L" = "green4", "O" = "blue", "M" = "orange"))    
+
+BaA
+
+ant <- ggplot(EN22_SP_Pia, aes(x= `Fla_Fla+Py`, y= `Ant_Ant+Phe`, col = EN22_SP_Pia$horizon)) +
+  scale_y_continuous(labels = function(x) paste0(x, ""),
+                     breaks = seq(0, 1.5, by = 0.25) ) +
+  geom_hline (yintercept = 0.1,             
+              linetype = "dashed",
+              color = "red") +  
+  geom_vline(xintercept = 0.5, linetype = "dashed", color = "red")+
+  geom_point()+
+  geom_text_repel(aes(label = paste(plot, sep = " ")), vjust = -1, size = 3, show.legend = FALSE) +
+  theme_minimal() + 
+  theme(  legend.position = "none",
+          text = element_text(family = "Calibri"),  
+          plot.title = element_text(size = 14),       
+          axis.title = element_text(size = 12),        
+          axis.text = element_text(size = 10))+
+  labs(color = "") +  # Legendentitel ändern
+  scale_color_manual(values = c("L" = "green4", "O" = "blue", "M" = "orange"))  
+
+ant
+
+ipy <- ggplot(EN22_SP_Pia, aes(x= `Fla_Fla+Py`, y= `Ipy_Ipy+Bpe`, col = EN22_SP_Pia$horizon)) +
+  scale_y_continuous(labels = function(x) paste0(x, ""),
+                     breaks = seq(0, 1.5, by = 0.25) ) +
+  geom_hline (yintercept = 0.1,             
+              linetype = "dashed",
+              color = "red") +  
+  geom_vline(xintercept = 0.5, linetype = "dashed", color = "red")+
+  geom_point()+
+  geom_text_repel(aes(label = paste(plot, sep = " ")), vjust = -1, size = 3, show.legend = FALSE) +
+  theme_minimal() + 
+  theme(  legend.position = "none",
+          text = element_text(family = "Calibri"),  
+          plot.title = element_text(size = 14),      
+          axis.title = element_text(size = 12),     
+          axis.text = element_text(size = 10))+
+  labs(color = "") +  # Legendentitel ändern
+  scale_color_manual(values = c("L" = "green4", "O" = "blue", "M" = "orange"))      
+
+ipy
+
+### stack the plots on top of each other 
+combined_plot <- lmw / ant  +  plot_layout(ncol = 1, heights = c(1, 1, 1))
+combined_plot
+combined_plot2 <- BaA / ipy  +  plot_layout(ncol = 1, heights = c(1, 1, 1))
+combined_plot2
+
+##boxplots of distance
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(tidyverse)
+
+### PAH-Variables as factor 
+EN22_SP_Pia_long <- EN22_SP_Pia %>%
+  pivot_longer(
+    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, Fla, Py, BaA, Chr, BbF, BaP, Ipy, BPe, DahA),
+    names_to = "PAH",
+    values_to = "value"
+  ) %>%
+  mutate(PAH = factor(PAH, levels = c("Nap", "Acy", "Ace", "Fle", "Phe", "Ant", 
+                                      "Fla", "Py", "BaA", "Chr", "BbF", "BaP", 
+                                      "Ipy", "BPe", "DahA")))
+
+### facet wrap multiple boxplots in a 3x5 raster
+
+ggplot(EN22_SP_Pia_long, aes(x = factor(distance_category), y = value)) +
+  geom_boxplot() +
+  facet_wrap(~ PAH, scales = "free_y", ncol = 3, nrow = 5) +  # Layout auf 3 Zeilen und 5 Spalten festlegen
+  labs(x = "Distance Category", y = "ng/g") +
+  theme_minimal() +
+  theme(
+    text = element_text(family = "Calibri"),  # Setzt den gesamten Text auf Calibri
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 10, family = "Calibri"), 
+    axis.title.x = element_text(size = 12, family = "Calibri"),  
+    axis.title.y = element_text(size = 12, family = "Calibri"),  
+    plot.title = element_text(size = 14, face = "bold", family = "Calibri"),
+    strip.text = element_text(size = 12, family = "Calibri")  
+  )
+    
+### also done with sum and ratio
+# Notwendige Bibliotheken laden
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+
+# Daten in Long-Format umwandeln und die Variablen in der gewünschten Reihenfolge als Faktor definieren
+EN22_SP_Pia_long_extra <- EN22_SP_Pia %>%
+  pivot_longer(
+    cols = c(Sum, LMW_HLW, `Ant_Ant+Phe`, `Ipy_Ipy+Bpe`, `Fla_Fla+Py`, `BaA_BaA+Chr`),
+    names_to = "Metric",
+    values_to = "value"
+  ) %>%
+  mutate(Metric = factor(Metric, levels = c("Sum", "LMW_HLW", "Ant_Ant+Phe", 
+                                            "Ipy_Ipy+Bpe", "Fla_Fla+Py", "BaA_BaA+Chr")))
+
+ggplot(EN22_SP_Pia_long_extra, aes(x = factor(distance_category), y = value)) +
+  geom_boxplot() +
+  facet_wrap(~ Metric, scales = "free_y", ncol = 3, nrow = 2) +  
+  labs(x = "Distance Category", y = "ng/g", title = "Boxplots of Diagnostic Ratios by Distance Category") +
+  theme_minimal() +
+  theme(
+    text = element_text(family = "Calibri"),  
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 10, family = "Calibri"),  
+    axis.title.x = element_text(size = 12, family = "Calibri"),  
+    axis.title.y = element_text(size = 12, family = "Calibri"),  
+    plot.title = element_text(size = 14, face = "bold", family = "Calibri"),
+    strip.text = element_text(size = 12, family = "Calibri")
+  )
+###also with only O and only M samples
+EN22_SP_Pia_longO <- X02EN22_SP_Pia_onlyO %>%
+  pivot_longer(
+    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, Fla, Py, BaA, Chr, BbF, BaP, Ipy, BPe, DahA),
+    names_to = "PAH",
+    values_to = "value"
+  ) %>%
+  mutate(PAH = factor(PAH, levels = c("Nap", "Acy", "Ace", "Fle", "Phe", "Ant", 
+                                      "Fla", "Py", "BaA", "Chr", "BbF", "BaP", 
+                                      "Ipy", "BPe", "DahA")))
+EN22_SP_Pia_longM <- X02EN22_SP_Pia_onlyM %>%
+  pivot_longer(
+    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, Fla, Py, BaA, Chr, BbF, BaP, Ipy, BPe, DahA),
+    names_to = "PAH",
+    values_to = "value"
+  ) %>%
+  mutate(PAH = factor(PAH, levels = c("Nap", "Acy", "Ace", "Fle", "Phe", "Ant", 
+                                      "Fla", "Py", "BaA", "Chr", "BbF", "BaP", 
+                                      "Ipy", "BPe", "DahA")))                                      
+
+### facet wrap multiple distance boxplots in a 3x5 raster only O and only M 
+
+ggplot(EN22_SP_Pia_longO, aes(x = factor(distance_category), y = value)) +
+  geom_boxplot() +
+  facet_wrap(~ PAH, scales = "free_y", ncol = 3, nrow = 5) +  # Layout auf 3 Zeilen und 5 Spalten festlegen
+  labs(x = "Distance Category", y = "ng/g", title = "Boxplots of PAH by Distance Category only organic samples") +
+  theme_minimal() +
+  theme(
+    text = element_text(family = "Calibri"),  # Setzt den gesamten Text auf Calibri
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 10, family = "Calibri"), 
+    axis.title.x = element_text(size = 20, family = "Calibri"),  
+    axis.title.y = element_text(size = 12, family = "Calibri"),  
+    plot.title = element_text(size = 14, face = "bold", family = "Calibri"),
+    strip.text = element_text(size = 12, family = "Calibri")
+    )
+    
+ggplot(EN22_SP_Pia_longM, aes(x = factor(distance_category), y = value)) +
+  geom_boxplot() +
+  facet_wrap(~ PAH, scales = "free_y", ncol = 3, nrow = 5) +  # Layout auf 3 Zeilen und 5 Spalten festlegen
+  labs(x = "Distance Category", y = "ng/g", title = "Boxplots of PAH by Distance Category only mineral samples") +
+  theme_minimal() +
+  theme(
+    text = element_text(family = "Calibri"),  # Setzt den gesamten Text auf Calibri
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 10, family = "Calibri"), 
+    axis.title.x = element_text(size = 12, family = "Calibri"),  
+    axis.title.y = element_text(size = 12, family = "Calibri"),  
+    plot.title = element_text(size = 14, face = "bold", family = "Calibri"),
+    strip.text = element_text(size = 12, family = "Calibri")
+    )
+  
+EN22_SP_Pia_long_extraO <- X02EN22_SP_Pia_onlyO %>%
+  pivot_longer(
+    cols = c(Sum, LMW_HLW, `Ant_Ant+Phe`, `Ipy_Ipy+Bpe`, `Fla_Fla+Py`, `BaA_BaA+Chr`),
+    names_to = "Metric",
+    values_to = "value"
+  ) %>%
+  mutate(Metric = factor(Metric, levels = c("Sum", "LMW_HLW", "Ant_Ant+Phe", 
+                                            "Ipy_Ipy+Bpe", "Fla_Fla+Py", "BaA_BaA+Chr")))
+
+ggplot(EN22_SP_Pia_long_extraO, aes(x = factor(distance_category), y = value)) +
+  geom_boxplot() +
+  facet_wrap(~ Metric, scales = "free_y", ncol = 3, nrow = 2) +  
+  labs(x = "Distance Category", y = "ng/g", title = "Boxplots of Diagnostic Ratios by Distance Category only organic samples") +
+  theme_minimal() +
+  theme(
+    text = element_text(family = "Calibri"),  
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 10, family = "Calibri"),  
+    axis.title.x = element_text(size = 12, family = "Calibri"),  
+    axis.title.y = element_text(size = 12, family = "Calibri"),  
+    plot.title = element_text(size = 14, face = "bold", family = "Calibri") ,
+    strip.text = element_text(size = 12, family = "Calibri")
+  )   
+  
+EN22_SP_Pia_long_extraM <- X02EN22_SP_Pia_onlyM %>%
+  pivot_longer(
+    cols = c(Sum, LMW_HLW, `Ant_Ant+Phe`, `Ipy_Ipy+Bpe`, `Fla_Fla+Py`, `BaA_BaA+Chr`),
+    names_to = "Metric",
+    values_to = "value"
+  ) %>%
+  mutate(Metric = factor(Metric, levels = c("Sum", "LMW_HLW", "Ant_Ant+Phe", 
+                                            "Ipy_Ipy+Bpe", "Fla_Fla+Py", "BaA_BaA+Chr")))
+
+ggplot(EN22_SP_Pia_long_extraM, aes(x = factor(distance_category), y = value)) +
+  geom_boxplot() +
+  facet_wrap(~ Metric, scales = "free_y", ncol = 3, nrow = 2) +  
+  labs(x = "Distance Category", y = "ng/g", title = "Boxplots of Diagnostic Ratios by Distance Category only mineral samples") +
+  theme_minimal() +
+  theme(
+    text = element_text(family = "Calibri"),  
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 10, family = "Calibri"),  
+    axis.title.x = element_text(size = 12, family = "Calibri"),  
+    axis.title.y = element_text(size = 12, family = "Calibri"),  
+    plot.title = element_text(size = 14, face = "bold", family = "Calibri"),
+    strip.text = element_text(size = 12, family = "Calibri")
+    )
+    
+##boxplots of age
+
+### PAH-Variables as factor 
+EN22_SP_Pia_long <- EN22_SP_Pia %>%
+  pivot_longer(
+    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, Fla, Py, BaA, Chr, BbF, BaP, Ipy, BPe, DahA),
+    names_to = "PAH",
+    values_to = "value"
+  ) %>%
+  mutate(PAH = factor(PAH, levels = c("Nap", "Acy", "Ace", "Fle", "Phe", "Ant", 
+                                      "Fla", "Py", "BaA", "Chr", "BbF", "BaP", 
+                                      "Ipy", "BPe", "DahA")))
+
+### facet wrap multiple boxplots in a 3x5 raster
+ggplot(EN22_SP_Pia_long, aes(x = factor(age_category), y = value)) +
+  geom_boxplot() +
+  facet_wrap(~ PAH, scales = "free_y", ncol = 3, nrow = 5) +  # Layout auf 3 Zeilen und 5 Spalten festlegen
+  labs(x = "Age Category", y = "ng/g", title = "Boxplots of PAH by Age Category") +
+  theme_minimal() +
+  theme(
+    text = element_text(family = "Calibri"),  # Setzt den gesamten Text auf Calibri
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 10, family = "Calibri"), 
+    axis.title.x = element_text(size = 12, family = "Calibri"),  
+    axis.title.y = element_text(size = 12, family = "Calibri"),  
+    plot.title = element_text(size = 14, face = "bold", family = "Calibri") ,
+    strip.text = element_text(size = 12, family = "Calibri")
+  )  
+  
+### with diagnostic ratios
+
+ggplot(EN22_SP_Pia_long_extra, aes(x = factor(age_category), y = value)) +
+  geom_boxplot() +
+  facet_wrap(~ Metric, scales = "free_y", ncol = 3, nrow = 2) +  
+  labs(x = "Age Category", y = "ng/g", title = "Boxplots of Diagnostic Ratios by Age Category") +
+  theme_minimal() +
+  theme(
+    text = element_text(family = "Calibri"),  
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 10, family = "Calibri"),  
+    axis.title.x = element_text(size = 12, family = "Calibri"),  
+    axis.title.y = element_text(size = 12, family = "Calibri"),  
+    plot.title = element_text(size = 14, face = "bold", family = "Calibri"),
+    strip.text = element_text(size = 12, family = "Calibri")
+  )
+  
+###also with only O and only M samples
+  
+### facet wrap multiple distance boxplots in a 3x5 raster only O and only M 
+
+ggplot(EN22_SP_Pia_longO, aes(x = factor(age_category), y = value)) +
+  geom_boxplot() +
+  facet_wrap(~ PAH, scales = "free_y", ncol = 3, nrow = 5) +  # Layout auf 3 Zeilen und 5 Spalten festlegen
+  labs(x = "Age Category", y = "ng/g", title = "Boxplots of PAH by Age Category only organic samples") +
+  theme_minimal() +
+  theme(
+    text = element_text(family = "Calibri"),  # Setzt den gesamten Text auf Calibri
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 10, family = "Calibri"), 
+    axis.title.x = element_text(size = 12, family = "Calibri"),  
+    axis.title.y = element_text(size = 12, family = "Calibri"),  
+    plot.title = element_text(size = 14, face = "bold", family = "Calibri"),
+    strip.text = element_text(size = 12, family = "Calibri")
+    )
+    
+ggplot(EN22_SP_Pia_longM, aes(x = factor(age_category), y = value)) +
+  geom_boxplot() +
+  facet_wrap(~ PAH, scales = "free_y", ncol = 3, nrow = 5) +  # Layout auf 3 Zeilen und 5 Spalten festlegen
+  labs(x = "Age Category", y = "ng/g", title = "Boxplots of PAH by Age Category only mineral samples") +
+  theme_minimal() +
+  theme(
+    text = element_text(family = "Calibri"),  # Setzt den gesamten Text auf Calibri
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 10, family = "Calibri"), 
+    axis.title.x = element_text(size = 12, family = "Calibri"),  
+    axis.title.y = element_text(size = 12, family = "Calibri"),  
+    plot.title = element_text(size = 14, face = "bold", family = "Calibri"),
+    strip.text = element_text(size = 12, family = "Calibri")
+    )
+
+
+ggplot(EN22_SP_Pia_long_extraO, aes(x = factor(age_category), y = value)) +
+  geom_boxplot() +
+  facet_wrap(~ Metric, scales = "free_y", ncol = 3, nrow = 2) +  
+  labs(x = "Age Category", y = "ng/g", title = "Boxplots of Diagnostic Ratios by Age Category only organic samples") +
+  theme_minimal() +
+  theme(
+    text = element_text(family = "Calibri"),  
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 10, family = "Calibri"),  
+    axis.title.x = element_text(size = 12, family = "Calibri"),  
+    axis.title.y = element_text(size = 12, family = "Calibri"),  
+    plot.title = element_text(size = 14, face = "bold", family = "Calibri"),
+    strip.text = element_text(size = 12, family = "Calibri")
+  )   
+  
+                                     
+
+ggplot(EN22_SP_Pia_long_extraM, aes(x = factor(age_category), y = value)) +
+  geom_boxplot() +
+  facet_wrap(~ Metric, scales = "free_y", ncol = 3, nrow = 2) +  
+  labs(x = "Age Category", y = "ng/g", title = "Boxplots of Diagnostic Ratios by Age Category only mineral samples") +
+  theme_minimal() +
+  theme(
+    text = element_text(family = "Calibri"),  
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 10, family = "Calibri"),  
+    axis.title.x = element_text(size = 12, family = "Calibri"),  
+    axis.title.y = element_text(size = 12, family = "Calibri"),  
+    plot.title = element_text(size = 14, face = "bold", family = "Calibri"),
+    strip.text = element_text(size = 12, family = "Calibri")
+    )  
+##boxplots of horizons  
+### PAH-Variables as factor 
+EN22_SP_Pia_long <- EN22_SP_Pia %>%
+  pivot_longer(
+    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, Fla, Py, BaA, Chr, BbF, BaP, Ipy, BPe, DahA),
+    names_to = "PAH",
+    values_to = "value"
+  ) %>%
+  mutate(PAH = factor(PAH, levels = c("Nap", "Acy", "Ace", "Fle", "Phe", "Ant", 
+                                      "Fla", "Py", "BaA", "Chr", "BbF", "BaP", 
+                                      "Ipy", "BPe", "DahA")))
+
+### facet wrap multiple boxplots in a 3x5 raster
+ggplot(EN22_SP_Pia_long, aes(x = factor(horizon, levels = c("L", "O", "M")), y = value)) +
+  geom_boxplot(aes(fill = factor(horizon))) +
+  facet_wrap(~ PAH, scales = "free_y", ncol = 3, nrow = 5) +  # Layout auf 3 Zeilen und 5 Spalten festlegen
+  labs(x = "Horizon", y = "ng/g", title = "Boxplots of PAH by Horizon") +
+  theme_minimal() +
+  theme(
+    text = element_text(family = "Calibri"),  # Setzt den gesamten Text auf Calibri
+    axis.text.x = element_text(hjust = 1, size = 10, family = "Calibri"), 
+    axis.title.x = element_text(size = 12, family = "Calibri"),  
+    axis.title.y = element_text(size = 12, family = "Calibri"),  
+    plot.title = element_text(size = 14, face = "bold", family = "Calibri")  ,
+    strip.text = element_text(size = 12, family = "Calibri")
+  )   +
+   guides(fill = "none")+
+    scale_fill_manual(values = c("darkgreen", "blue", "orange")
+    )
+  
+### with diagnostic ratios
+# Facettierten Boxplot mit 2 Zeilen und 3 Spalten erstellen
+
+ggplot(EN22_SP_Pia_long_extra, aes(x = factor(horizon, levels = c("L", "O", "M")), y = value)) +
+  geom_boxplot(aes(fill = factor(horizon))) +
+  facet_wrap(~ Metric, scales = "free_y", ncol = 3, nrow = 2) +  
+  labs(x = "Horizon", y = "ng/g", title = "Boxplots of Diagnostic Ratios by Horizon") +
+  theme_minimal() +
+  theme(
+    text = element_text(family = "Calibri"),  
+    axis.text.x = element_text(angle = 0, hjust = 1, size = 10, family = "Calibri"),  
+    axis.title.x = element_text(size = 12, family = "Calibri"),  
+    axis.title.y = element_text(size = 12, family = "Calibri"),  
+    plot.title = element_text(size = 14, face = "bold", family = "Calibri"),
+    strip.text = element_text(size = 12, family = "Calibri")
+  ) +
+  guides(fill = "none")+
+    scale_fill_manual(values = c("darkgreen", "blue", "orange")
+    )
+  
+  
