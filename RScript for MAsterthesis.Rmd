@@ -3,7 +3,7 @@ library(readxl)
 View(X02EN22_SP_Pia_better_noneg)
 # load data
 library(readxl)  
-##all data, without negative values
+##all data, without negative values (=noneg)
 EN22_SP_Pia <- read_excel("D:/Masterarbeit/Daten/02EN22_SP_Pia_better_noneg.xlsx") 
 ## load data with only one horizon 
 X02EN22_SP_Pia_onlyO <- read_excel("D:/Masterarbeit/Daten/02EN22_SP_Pia_onlyO_noneg.xlsx")  
@@ -13,21 +13,26 @@ X02EN22_SP_Pia_onlyM <- read_excel ("D:/Masterarbeit/Daten/02EN22_SP_Pia_onlyM_n
 install.packages( "nortest")
 library( nortest)
 
-shapiro.test( EN22_SP_Pia$Nap) # signifikant
-shapiro.test( EN22_SP_Pia$Acy) # signifikant
-shapiro.test( EN22_SP_Pia$Ace) # signifikant
-shapiro.test( EN22_SP_Pia$Fle) # signifikant
-shapiro.test( EN22_SP_Pia$Phe) # signifikant
-shapiro.test( EN22_SP_Pia$Ant) # signifikant
-shapiro.test( EN22_SP_Pia$Fla) # signifikant
-shapiro.test( EN22_SP_Pia$Py) # signifikant
-shapiro.test( EN22_SP_Pia$BaA) # signifikant
-shapiro.test( EN22_SP_Pia$Chr) # signifikant
-shapiro.test( EN22_SP_Pia$BbF) # signifikant
-shapiro.test( EN22_SP_Pia$BaP) # signifikant
-shapiro.test( EN22_SP_Pia$Ipy) # signifikant
-shapiro.test( EN22_SP_Pia$BPe) # signifikant
-shapiro.test( EN22_SP_Pia$DahA) # signifikant
+shapiro.test( EN22_SP_Pia$Nap) 
+shapiro.test( EN22_SP_Pia$Acy) 
+shapiro.test( EN22_SP_Pia$Ace) 
+shapiro.test( EN22_SP_Pia$Fle) 
+shapiro.test( EN22_SP_Pia$Phe) 
+shapiro.test( EN22_SP_Pia$Ant) 
+shapiro.test( EN22_SP_Pia$Fla) 
+shapiro.test( EN22_SP_Pia$Py) 
+shapiro.test( EN22_SP_Pia$BaA) 
+shapiro.test( EN22_SP_Pia$Chr) 
+shapiro.test( EN22_SP_Pia$BbF) 
+shapiro.test( EN22_SP_Pia$BaP) 
+shapiro.test( EN22_SP_Pia$Ipy) 
+shapiro.test( EN22_SP_Pia$BPe) 
+shapiro.test( EN22_SP_Pia$DahA) 
+shapiro.test( EN22_SP_Pia$Sum) 
+shapiro.test( EN22_SP_Pia$`LMW_HLW`) 
+shapiro.test( EN22_SP_Pia$`Fla_Fla+Py`)
+shapiro.test( EN22_SP_Pia$`BaA_BaA+Chr`)
+shapiro.test( EN22_SP_Pia$`Ipy_Ipy+Bpe`)
 
 # Kruskall wallis Test since data is not normal distributed, a non parametrical test is chosen
 ## test each PAH, ratio and sum in relation to the horizon
@@ -131,6 +136,7 @@ dunn_test(DahA~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 dunn_test(LMW_HLW~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 dunn_test(`Ant_Ant+Phe`~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 dunn_test(`Fla_Fla+Py`~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
+dunn_test(`BaA_BaA+Chr`~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 dunn_test(`Ipy_Ipy+Bpe`~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 dunn_test(Sum~horizon, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 
@@ -181,7 +187,7 @@ dunn_test(`Ipy_Ipy+Bpe`~age_category, data=EN22_SP_Pia, p.adjust.method = "bonfe
 dunn_test(Sum~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 
 
-# PCA
+# conduct PCA
 ## 1 and 2 dimension
 EN22_SP_Pia2 <- read_excel("D:/Masterarbeit/Daten/02EN22_SP_Pia_better_noneg.xlsx") 
 View(EN22_SP_Pia2)
@@ -228,12 +234,12 @@ fviz_eig(pca_result)
 fviz_pca_biplot(pca_result, label = "var",
                 repel = TRUE,
                 habillage = EN22_SP_Pia$horizon,
-                palette = c("darkgreen", "blue", "orange"),
+                palette = c("darkgreen", "orange", "blue"),
                 geom.ind = "point",
                 pointshape = 19) +
                 theme(text = element_text(family = "Calibri", size = 12)) +
                 labs(color = NULL) 
-               # addEllipses = TRUE, ellipse.level = 0.95)   
+               
                 
 ## 2 and 3 dimension
 ### Extract PC-Scores
@@ -259,7 +265,7 @@ fviz_pca_biplot(pca_result,
                 label = "var",                                                    
                 repel = TRUE,
                 habillage = EN22_SP_Pia$horizon,
-                palette = c("darkgreen", "blue", "orange"),
+                palette = c("darkgreen", "orange", "blue"),
                 geom.ind = "point",
                 pointshape = 19)+
                #addEllipses = TRUE, ellipse.level = 0.95) +                             
@@ -304,23 +310,24 @@ ggplot(EN22_SP_Pia_saeulen, aes(x = combination, y=value, fill = PAH)) +
   labs(title = "Abundance of PAH",
        x = "sorted by year since fire event",
        y = "ng/g") +
-  geom_hline(yintercept = 500, linetype = "dashed", color = "red") +
+  geom_hline(yintercept = 500, linetype = "dashed", color = "black") +
+  geom_hline(yintercept = 5000, linetype = "dashed", color = "red")+
   scale_x_discrete(labels = function(x) {
     sapply(x, function(label) {
-      # Hol den passenden Horizont für jedes Label
+      # fitting horizon for each label provided
       horiz <- EN22_SP_Pia_saeulen$horizon[which(EN22_SP_Pia_saeulen$combination == label)[1]]
-      # Färbe das Label nach dem Horizont ein
+      # dye each label
       paste0('<span style="color:', horizon_colors[horiz], ';">', label, '</span>')
     })
   }) +
   theme_minimal() +
   theme(axis.title.x = element_blank(),
-        axis.text.x = element_markdown(angle = 45, hjust = 1),  # Verwende element_markdown
+        axis.text.x = element_markdown(angle = 45, hjust = 1),  # use element_markdown
         axis.ticks.x = element_blank(),
-        text = element_text(family = "Calibri", size = 12),     # Schriftart und Schriftgröße allgemein
-        axis.title = element_text(family = "Calibri", size = 14),  # Achsentitel
-        axis.text = element_text(family = "Calibri", size = 10),   # Achsentext
-        plot.title = element_text(family = "Calibri", size = 16, face = "bold"))  # Diagrammtitel
+        text = element_text(family = "Calibri", size = 12),     # font and size
+        axis.title = element_text(family = "Calibri", size = 14),  # title
+        axis.text = element_text(family = "Calibri", size = 10),   # text
+        plot.title = element_text(family = "Calibri", size = 16, face = "bold"))  # diagram title
 
         
 ## ratio diagram
@@ -747,4 +754,91 @@ ggplot(EN22_SP_Pia_long_extra, aes(x = factor(horizon, levels = c("L", "O", "M")
     scale_fill_manual(values = c("darkgreen", "blue", "orange")
     )
   
+### mines distance
+model <- lm(Sum ~ `Distance to mine`, data = EN22_SP_Pia)
+summary(model)
+correlation <- cor(EN22_SP_Pia$'Distance to mine', EN22_SP_Pia$Sum)
+
+library(ggplot2)
+
+ggplot(EN22_SP_Pia, aes(x = `Distance to mine`, y = LMW_HLW)) +
+  geom_point() +  # Punkte für die Daten
+  geom_smooth(method = "lm", col = "blue") +  # Lineare Regressionslinie
+  labs(x = "Distance to Mine",
+       y = "Sum of PAH") +
+  scale_y_continuous(limits = c(NA, 3.5)) +
+  theme_minimal() +
+  theme(text = element_text(family = "Calibri"))
+
+View(EN22_SP_Pia)
+
+## distance to fire
+model <- lm(Summe ~ `Distance to mine`, data = EN22_SP_Pia)
+summary(model)
+correlation <- cor(EN22_SP_Pia$'Distance to mine', EN22_SP_Pia$Sum)
+
+library(ggplot2)
+
+ggplot(EN22_SP_Pia, aes(x = `Distance to fire (km)`, y = Sum)) +
+  geom_point() + 
+  geom_smooth(method = "lm", col = "blue") +  # Lineare Regressionslinie
+  labs(x = "Distance to fire",
+       y = "Sum of PAH") +
+ # scale_y_continuous(limits = c(NA, 3.5)) +
+  theme_minimal() +
+  theme(text = element_text(family = "Calibri"))
+
+##stack all fire indices
+install.packages("ggplot2")
+install.packages("patchwork")
+library(ggplot2)
+library(patchwork)
+stack <- read_excel("Daten/data exploration.xlsx")
+View(stack)
+
+# set order of plots
+stack$plot <- factor(stack$plot, levels = c(55, 39, 6, 12, 69, 49, 9, 37, 52, 63, 5, 60, 65))  # wished order
+horizon_colors <- c("L" = "green4", "O" = "blue", "M" = "orange", 
+                    "ash" = "darkgreen", "bark" = "darkgreen", 
+                    "charcoal" = "darkgreen", "wood" = "darkgreen")
+
+# First Plot (Bar Chart) for FRP 
+stack$FRP <- as.numeric(stack$FRP)  # Konvertiere FRP zu numerischen Daten
+plot1 <- ggplot(stack, aes(x = plot, y = FRP)) +
+  geom_bar(stat = "identity", fill = "darkgrey", na.rm = TRUE) +  # na.rm = TRUE lässt fehlende Daten aus
+  theme_minimal() +
+  labs(title = NULL, y = "FRP (MW)", x = NULL) +  # X-axis text is deleted
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())  # X-Axis is hidden
+
+# second Plot (Bar Chart) for dNBR
+plot2 <- ggplot(stack, aes(x = plot, y = dNBR)) +
+  geom_bar(stat = "identity", fill = "black", na.rm = TRUE) +
+  theme_minimal() +
+  labs(title = NULL, y = "dNBR", x = NULL) +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+# third Plot (Bar Chart) for dNDVI
+plot3 <- ggplot(stack, aes(x = plot, y = dNVDI)) +
+  geom_bar(stat = "identity", fill = "lightgrey", na.rm = TRUE) +
+  theme_minimal() +
+  labs(title = NULL, y = "dNDVI", x = NULL) +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+# fourth Plot (for PAH Sum in horizons)
+plot4 <- ggplot(stack, aes(x = plot, y = Sum, fill = horizon)) +  
+  geom_bar(stat = "identity", position = "stack", na.rm = TRUE) +
+  theme_minimal() +
+  scale_fill_manual(values = horizon_colors)+
+  labs(title = NULL, y = "Sum of PAH (ng/g)", x = "plots") +
+    theme(axis.title.x = element_text(),  # X-Achsen-Titel anzeigen
+          axis.text.x = element_text())   # X-Achsen-Beschriftungen anzeigen
+  
+
+# stack plots
+combined_plot <- (plot1 / plot2 / plot3/plot4) +
+  plot_layout(heights = c(1, 1, 1, 1))  # Höhenverhältnis anpassen, damit X-Achse kleiner ist
+
+# show stacked plot
+print(combined_plot)
+
   
