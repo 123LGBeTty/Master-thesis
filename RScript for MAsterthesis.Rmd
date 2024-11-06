@@ -186,6 +186,31 @@ dunn_test(`BaA_BaA+Chr`~age_category, data=EN22_SP_Pia, p.adjust.method = "bonfe
 dunn_test(`Ipy_Ipy+Bpe`~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 dunn_test(Sum~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 
+### test all fire proxies
+## distance to mines, FRP, dNBR, dNVDI
+shapiro.test( EN22_SP_Pia$`Distance to mine`) 
+kruskal.test(EN22_SP_Pia$Sum~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$`LMW_HLW`~EN22_SP_Pia$`Distance to mine`)
+
+EN22_SP_Pia$FRP <- as.numeric(EN22_SP_Pia$FRP)
+shapiro.test( EN22_SP_Pia$FRP) 
+kruskal.test(EN22_SP_Pia$Sum~EN22_SP_Pia$`FRP`)
+kruskal.test(EN22_SP_Pia$`LMW_HLW`~EN22_SP_Pia$`FRP`)
+
+shapiro.test( EN22_SP_Pia$dNBR) 
+kruskal.test(EN22_SP_Pia$Sum~EN22_SP_Pia$dNBR)
+dunn_test(Sum~dNBR, data = EN22_SP_Pia, p.adjust.method = "bonferroni")
+anova_model <- aov(Sum ~ dNBR, data = EN22_SP_Pia)
+summary(anova_model)
+kruskal.test(EN22_SP_Pia$`LMW_HLW`~EN22_SP_Pia$dNBR)
+
+EN22_SP_Pia$dNVDI <- as.numeric(EN22_SP_Pia$dNVDI)
+shapiro.test( EN22_SP_Pia$dNVDI) 
+kruskal.test(EN22_SP_Pia$Sum~EN22_SP_Pia$dNVDI)
+kruskal.test(EN22_SP_Pia$`LMW_HLW`~EN22_SP_Pia$`Distance to mine`)
+
+
+
 
 # conduct PCA
 ## 1 and 2 dimension
