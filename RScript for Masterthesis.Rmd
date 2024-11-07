@@ -106,6 +106,7 @@ kruskal.test(EN22_SP_Pia$LMW_HLW~EN22_SP_Pia$age_category)
 kruskal.test(EN22_SP_Pia$`Ant_Ant+Phe`~EN22_SP_Pia$age_category)
 kruskal.test(EN22_SP_Pia$`Fla_Fla+Py`~EN22_SP_Pia$age_category)
 kruskal.test(EN22_SP_Pia$`BaA_BaA+Chr`~EN22_SP_Pia$age_category)
+kruskal.test(EN22_SP_Pia$`Ipy_Ipy+Bpe`~EN22_SP_Pia$age_category)
 ### check if there is a difference in horizons in age category
 kruskal.test(X02EN22_SP_Pia_onlyO$LMW_HLW~X02EN22_SP_Pia_onlyO$age_category)
 #### -> not significant no further testing needed
@@ -187,15 +188,39 @@ dunn_test(`Ipy_Ipy+Bpe`~age_category, data=EN22_SP_Pia, p.adjust.method = "bonfe
 dunn_test(Sum~age_category, data=EN22_SP_Pia, p.adjust.method = "bonferroni")
 
 ### test all fire proxies
-## distance to mines, FRP, dNBR, dNVDI
+## distance to mines
 shapiro.test( EN22_SP_Pia$`Distance to mine`) 
-kruskal.test(EN22_SP_Pia$Sum~EN22_SP_Pia$`Distance to mine`)
-kruskal.test(EN22_SP_Pia$`LMW_HLW`~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$Nap~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$Acy~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$Ace~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$Fle~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$Phe~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$Ant~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$Fla*~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$Py*~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$BaA*~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$Chr*~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$BbF*~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$BaP*~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$Ipy*~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$DahA*~EN22_SP_Pia$`Distance to mine`)
 
+kruskal.test(EN22_SP_Pia$`LMW_HLW`~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$`Ant_Ant+Phe`~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$`Fla_Fla+Py`~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$`BaA_BaA+Chr`~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$`Ipy_Ipy+Bpe`~EN22_SP_Pia$`Distance to mine`)
+kruskal.test(EN22_SP_Pia$Sum~EN22_SP_Pia$`Distance to mine`)
+
+##FRP, dNBR, dNVDI
 EN22_SP_Pia$FRP <- as.numeric(EN22_SP_Pia$FRP)
 shapiro.test( EN22_SP_Pia$FRP) 
-kruskal.test(EN22_SP_Pia$Sum~EN22_SP_Pia$`FRP`)
-kruskal.test(EN22_SP_Pia$`LMW_HLW`~EN22_SP_Pia$`FRP`)
+kruskal.test(EN22_SP_Pia$`LMW_HLW`~EN22_SP_Pia$FRP)
+kruskal.test(EN22_SP_Pia$`Ant_Ant+Phe`~EN22_SP_Pia$FRP)
+kruskal.test(EN22_SP_Pia$`Fla_Fla+Py`~EN22_SP_Pia$FRP)
+kruskal.test(EN22_SP_Pia$`BaA_BaA+Chr`~EN22_SP_Pia$FRP)
+kruskal.test(EN22_SP_Pia$`Ipy_Ipy+Bpe`~EN22_SP_Pia$FRP)
+kruskal.test(EN22_SP_Pia$Sum~EN22_SP_Pia$FRP
 
 shapiro.test( EN22_SP_Pia$dNBR) 
 kruskal.test(EN22_SP_Pia$Sum~EN22_SP_Pia$dNBR)
@@ -203,11 +228,21 @@ dunn_test(Sum~dNBR, data = EN22_SP_Pia, p.adjust.method = "bonferroni")
 anova_model <- aov(Sum ~ dNBR, data = EN22_SP_Pia)
 summary(anova_model)
 kruskal.test(EN22_SP_Pia$`LMW_HLW`~EN22_SP_Pia$dNBR)
+kruskal.test(EN22_SP_Pia$`Ant_Ant+Phe`~EN22_SP_Pia$dNBR)
+kruskal.test(EN22_SP_Pia$`Fla_Fla+Py`~EN22_SP_Pia$dNBR)
+kruskal.test(EN22_SP_Pia$`BaA_BaA+Chr`~EN22_SP_Pia$dNBR)
+kruskal.test(EN22_SP_Pia$`Ipy_Ipy+Bpe`~EN22_SP_Pia$dNBR)
+kruskal.test(EN22_SP_Pia$Sum~EN22_SP_Pia$dNBR)
 
 EN22_SP_Pia$dNVDI <- as.numeric(EN22_SP_Pia$dNVDI)
 shapiro.test( EN22_SP_Pia$dNVDI) 
+kruskal.test(EN22_SP_Pia$`LMW_HLW`~EN22_SP_Pia$dNVDI)
+kruskal.test(EN22_SP_Pia$`Ant_Ant+Phe`~EN22_SP_Pia$dNVDI)
+kruskal.test(EN22_SP_Pia$`Fla_Fla+Py`~EN22_SP_Pia$dNVDI)
+kruskal.test(EN22_SP_Pia$`BaA_BaA+Chr`~EN22_SP_Pia$dNVDI)
+kruskal.test(EN22_SP_Pia$`Ipy_Ipy+Bpe`~EN22_SP_Pia$dNVDI)
 kruskal.test(EN22_SP_Pia$Sum~EN22_SP_Pia$dNVDI)
-kruskal.test(EN22_SP_Pia$`LMW_HLW`~EN22_SP_Pia$`Distance to mine`)
+
 
 
 
