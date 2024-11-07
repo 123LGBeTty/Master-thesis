@@ -500,7 +500,7 @@ library(tidyverse)
 ### PAH-Variables as factor 
 EN22_SP_Pia_long <- EN22_SP_Pia %>%
   pivot_longer(
-    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, 'Fla*', 'Py*', 'BaA*', 'Chr*', 'BbF*', 'BaP*', 'Ipy*', 'BPe*', 'DahA*'),
+    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, `Fla*`, `Py*`, `BaA*`, `Chr*`, `BbF*`, `BaP*`, `Ipy*`, `Bpe*`, `DahA*`),
     names_to = "PAH",
     values_to = "value"
   ) %>%
@@ -559,7 +559,7 @@ ggplot(EN22_SP_Pia_long_extra, aes(x = factor(distance_category), y = value)) +
 
 EN22_SP_Pia_longO <- X02EN22_SP_Pia_onlyO %>%
   pivot_longer(
-    cols = c(Nap, Acy, Ace, Fle, Phe, Ant,'Fla*', 'Py*', 'BaA*', 'Chr*', 'BbF*', 'BaP*', 'Ipy*', 'BPe*', 'DahA*'),
+    cols = c(Nap, Acy, Ace, Fle, Phe, Ant,`Fla*`, `Py*`, `BaA*`, `Chr*`, `BbF*`, `BaP*`, `Ipy*`, `Bpe*`, `DahA*`),
     names_to = "PAH",
     values_to = "value"
   ) %>%
@@ -568,7 +568,7 @@ EN22_SP_Pia_longO <- X02EN22_SP_Pia_onlyO %>%
                                       "Ipy", "BPe", "DahA")))
 EN22_SP_Pia_longM <- X02EN22_SP_Pia_onlyM %>%
   pivot_longer(
-    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, 'Fla*', 'Py*', 'BaA*', 'Chr*', 'BbF*', 'BaP*', 'Ipy*', 'BPe*', 'DahA*'),
+    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, `Fla*`, `Py*`, `BaA*`, `Chr*`, `BbF*`, `BaP*`, `Ipy*`, `Bpe*`, `DahA*`),
     names_to = "PAH",
     values_to = "value"
   ) %>%
@@ -657,7 +657,7 @@ ggplot(EN22_SP_Pia_long_extraM, aes(x = factor(distance_category), y = value)) +
 ### PAH-Variables as factor 
 EN22_SP_Pia_long <- EN22_SP_Pia %>%
   pivot_longer(
-    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, 'Fla*', 'Py*', 'BaA*', 'Chr*', 'BbF*', 'BaP*', 'Ipy*', 'BPe*', 'DahA*'),
+    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, `Fla*`, `Py*`, `BaA*`, `Chr*`, `BbF*`, `BaP*`, `Ipy*`, `Bpe*`, `DahA*`),
     names_to = "PAH",
     values_to = "value"
   ) %>%
@@ -763,7 +763,7 @@ ggplot(EN22_SP_Pia_long_extraM, aes(x = factor(age_category), y = value)) +
 ### PAH-Variables as factor 
 EN22_SP_Pia_long <- EN22_SP_Pia %>%
   pivot_longer(
-    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, 'Fla*', 'Py*', 'BaA*', 'Chr*', 'BbF*', 'BaP*', 'Ipy*', 'BPe*', 'DahA*'),
+    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, `Fla*`, `Py*`, `BaA*`, `Chr*`, `BbF*`, `BaP*`, `Ipy*`, `Bpe*`, `DahA*`),
     names_to = "PAH",
     values_to = "value"
   ) %>%
