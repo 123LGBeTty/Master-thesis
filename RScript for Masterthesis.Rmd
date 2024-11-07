@@ -1,4 +1,5 @@
 
+
 library(readxl)
 View(X02EN22_SP_Pia_noneg)
 # load data
@@ -500,13 +501,13 @@ library(tidyverse)
 ### PAH-Variables as factor 
 EN22_SP_Pia_long <- EN22_SP_Pia %>%
   pivot_longer(
-    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, `Fla*`, `Py*`, `BaA*`, `Chr*`, `BbF*`, `BaP*`, `Ipy*`, `Bpe*`, `DahA*`),
+    cols = c(Nap, Acy, Ace, Fle, Phe, Ant,  `Fla*`, `Py*`, `BaA*`, `Chr*`, `BbF*`, `BaP*`, `Ipy*`, `Bpe*`, `DahA*`),
     names_to = "PAH",
     values_to = "value"
   ) %>%
   mutate(PAH = factor(PAH, levels = c("Nap", "Acy", "Ace", "Fle", "Phe", "Ant", 
-                                      "Fla", "Py", "BaA", "Chr", "BbF", "BaP", 
-                                      "Ipy", "BPe", "DahA")))
+                                      "Fla*", "Py*", "BaA*", "Chr*", "BbF*", "BaP*", 
+                                      "Ipy*", "Bpe*", "DahA*")))
 
 ### facet wrap multiple boxplots in a 3x5 raster
 
@@ -564,17 +565,17 @@ EN22_SP_Pia_longO <- X02EN22_SP_Pia_onlyO %>%
     values_to = "value"
   ) %>%
   mutate(PAH = factor(PAH, levels = c("Nap", "Acy", "Ace", "Fle", "Phe", "Ant", 
-                                      "Fla", "Py", "BaA", "Chr", "BbF", "BaP", 
-                                      "Ipy", "BPe", "DahA")))
+                                      "Fla*", "Py*", "BaA*", "Chr*", "BbF*", "BaP*", 
+                                      "Ipy*", "Bpe*", "DahA*")))
 EN22_SP_Pia_longM <- X02EN22_SP_Pia_onlyM %>%
   pivot_longer(
-    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, `Fla*`, `Py*`, `BaA*`, `Chr*`, `BbF*`, `BaP*`, `Ipy*`, `Bpe*`, `DahA*`),
+    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, 'Fla*', 'Py*', 'BaA*', 'Chr*', 'BbF*', 'BaP*', 'Ipy*', 'Bpe*', 'DahA*'),
     names_to = "PAH",
     values_to = "value"
   ) %>%
   mutate(PAH = factor(PAH, levels = c("Nap", "Acy", "Ace", "Fle", "Phe", "Ant", 
-                                      "Fla", "Py", "BaA", "Chr", "BbF", "BaP", 
-                                      "Ipy", "BPe", "DahA")))                                      
+                                      "Fla*", "Py*", "BaA*", "Chr*", "BbF*", "BaP*", 
+                                      "Ipy*", "Bpe*", "DahA*")))                                     
 
 ### distance boxplots for one horizon in 3x5 frame for PAH and diagnostic ratio
 
@@ -655,16 +656,6 @@ ggplot(EN22_SP_Pia_long_extraM, aes(x = factor(distance_category), y = value)) +
 ## boxplots of age
 
 ### PAH-Variables as factor 
-EN22_SP_Pia_long <- EN22_SP_Pia %>%
-  pivot_longer(
-    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, `Fla*`, `Py*`, `BaA*`, `Chr*`, `BbF*`, `BaP*`, `Ipy*`, `Bpe*`, `DahA*`),
-    names_to = "PAH",
-    values_to = "value"
-  ) %>%
-  mutate(PAH = factor(PAH, levels = c("Nap", "Acy", "Ace", "Fle", "Phe", "Ant", 
-                                      "Fla", "Py", "BaA", "Chr", "BbF", "BaP", 
-                                      "Ipy", "BPe", "DahA")))
-
 ### facet wrap multiple boxplots in a 3x5 raster
 ggplot(EN22_SP_Pia_long, aes(x = factor(age_category), y = value)) +
   geom_boxplot() +
@@ -761,16 +752,6 @@ ggplot(EN22_SP_Pia_long_extraM, aes(x = factor(age_category), y = value)) +
 
 ##boxplots of horizons  
 ### PAH-Variables as factor 
-EN22_SP_Pia_long <- EN22_SP_Pia %>%
-  pivot_longer(
-    cols = c(Nap, Acy, Ace, Fle, Phe, Ant, `Fla*`, `Py*`, `BaA*`, `Chr*`, `BbF*`, `BaP*`, `Ipy*`, `Bpe*`, `DahA*`),
-    names_to = "PAH",
-    values_to = "value"
-  ) %>%
-  mutate(PAH = factor(PAH, levels = c("Nap", "Acy", "Ace", "Fle", "Phe", "Ant", 
-                                      "Fla", "Py", "BaA", "Chr", "BbF", "BaP", 
-                                      "Ipy", "BPe", "DahA")))
-
 ### facet wrap multiple boxplots in a 3x5 raster
 ggplot(EN22_SP_Pia_long, aes(x = factor(horizon, levels = c("L", "O", "M")), y = value)) +
   geom_boxplot(aes(fill = factor(horizon))) +
@@ -786,7 +767,7 @@ ggplot(EN22_SP_Pia_long, aes(x = factor(horizon, levels = c("L", "O", "M")), y =
     strip.text = element_text(size = 12, family = "Calibri")
   )   +
    guides(fill = "none")+
-    scale_fill_manual(values = c("darkgreen", "blue", "orange")
+    scale_fill_manual(values = c("darkgreen", "orange", "blue")
     )
   
 ### with diagnostic ratios
@@ -805,7 +786,7 @@ ggplot(EN22_SP_Pia_long_extra, aes(x = factor(horizon, levels = c("L", "O", "M")
     strip.text = element_text(size = 12, family = "Calibri")
   ) +
   guides(fill = "none")+
-    scale_fill_manual(values = c("darkgreen", "blue", "orange")
+    scale_fill_manual(values = c("darkgreen", "orange", "blue")
     )
   
 ### mines distance
@@ -894,5 +875,3 @@ combined_plot <- (plot1 / plot2 / plot3/plot4) +
 
 # show stacked plot
 print(combined_plot)
-
-  
