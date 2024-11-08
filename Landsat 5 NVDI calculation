@@ -1,0 +1,82 @@
+// Setze das Untersuchungsgebiet (hier als Rechteck)
+var geometry = ee.FeatureCollection('projects/en22-pv-canada/assets/1kmKoordinaten_shapefile');
+var points = ee.FeatureCollection('projects/en22-pv-canada/assets/1kmKoordinaten_shapefile');
+
+// Lade die Landsat 8 ImageCollection und filtere nach Datum und Gebiet
+var landsat = ee.ImageCollection('LANDSAT/LT05/C02/T1_L2')
+  .filterDate('1997-05-01', '2000-10-30') // Zeitfilter
+  .filterBounds(geometry); // Filtere nach dem Gebiet
+
+// Wähle ein Bild aus (oder verwende den Median über die Zeit)
+var image = landsat.median().clip(geometry);
+
+// Berechne den NDVI (NIR - Red) / (NIR + Red)
+// NIR ist Band 5, Rot ist Band 4 für Landsat 8
+var ndvi = image.normalizedDifference(['SR_B5', 'SR_B4']).rename('NDVI');
+
+// Zeige den NDVI auf der Karte an
+Map.addLayer(ndvi, {min: 0, max: 1, palette: ['white', 'green']}, 'NDVI');
+
+// Setze den Kartenausschnitt auf das Untersuchungsgebiet
+//Map.centerObject(geometry, 8);
+
+// Optional: Drucke den NDVI-Wert eines bestimmten Punktes
+
+//var ndviAtPoint = ndvi.reduceRegion({
+//  reducer: ee.Reducer.mean(),
+ // geometry: points,
+//  scale: 30 // Landsat 8 hat eine Auflösung von 30 Metern
+//});
+//print('NDVI-Wert an dem Punkt:', ndviAtPoint);
+
+
+
+// Zeiträume festlegen
+var preFireDate = ee.Date('1998-07-31');  // Beispiel: Vor dem Brand
+var postFireDate = ee.Date('2000-07-01'); // Beispiel: Nach dem Brand
+
+// Lade Landsat-Daten (oder MODIS), um den NDVI zu berechnen
+var landsat = ee.ImageCollection('LANDSAT/LT05/C02/T1_L2') // Landsat 5
+    .filterBounds(points)
+    .filterDate('1998-01-01', '2000-12-31') // Wähle das passende Jahr
+    .filter(ee.Filter.lt('CLOUD_COVER', 30)); // Weniger als 25% Wolken
+
+// Funktion, um den NDVI zu berechnen
+var calculateNDVI = function(image) {
+  var ndvi = image.normalizedDifference(['SR_B5', 'SR_B4']).rename('NDVI'); // B5: NIR, B4: Red für Landsat 8
+  return image.addBands(ndvi);
+};
+
+// Berechne NDVI vor dem Feuer
+var preFireNDVI = landsat
+    .filterDate('1998-07-01', preFireDate)
+    .map(calculateNDVI)
+    .mean()
+    .select('NDVI'); // Mittlerer NDVI vor dem Feuer
+
+// Berechne NDVI nach dem Feuer
+var postFireNDVI = landsat
+    .filterDate(postFireDate, '2000-07-31')
+    .map(calculateNDVI)
+    .mean()
+    .select('NDVI'); // Mittlerer NDVI nach dem Feuer
+
+// Visualisierung des NDVI
+Map.addLayer(preFireNDVI, {min: -0.5, max: 1, palette: ['white', 'green']}, 'Pre-Fire NDVI');
+Map.addLayer(postFireNDVI, {min: -0.5, max: 1, palette: ['white', 'green']}, 'Post-Fire NDVI');
+
+// Berechne den NDVI-Wert für jedes Plot (vor und nach dem Feuer)
+var preFireNDVIatPlots = preFireNDVI.reduceRegions({
+  collection: points,
+  reducer: ee.Reducer.mean(),
+  scale: 30 // Landsat hat eine 30m-Auflösung
+});
+var postFireNDVIatPlots = postFireNDVI.reduceRegions({
+  collection: points,
+  reducer: ee.Reducer.mean(),
+  scale: 30
+});
+
+// Zeige die NDVI-Werte in der Konsole an
+print('NDVI vor dem Feuer:', preFireNDVIatPlots);
+print('NDVI nach dem Feuer:', postFireNDVIatPlots);
