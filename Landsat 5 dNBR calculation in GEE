@@ -1,0 +1,53 @@
+// Definieren Sie die Geometrie (FeatureCollection)
+var geometry = ee.FeatureCollection('projects/en22-pv-canada/assets/1kmKoordinaten_shapefile');
+
+// Landsat 5: Vor dem Brand (1989-2011)
+var preFireImage_L5 = ee.ImageCollection("LANDSAT/LT05/C02/T1_L2")
+                        .filterBounds(geometry)
+                        .filterDate('1987-07-01', '1987-07-31')
+                        .mean(); // Mittelwert für den Zeitraum
+
+// Landsat 5: Nach dem Brand - Beispielzeitraum anpassen
+var postFireImage_L5 = ee.ImageCollection("LANDSAT/LT05/C02/T1_L2")
+                        .filterBounds(geometry)
+                        .filterDate('1990-07-01', '1990-07-31') // Beispielzeitraum
+                        .mean(); // Mittelwert für den Zeitraum
+
+
+// NBR Berechnung
+
+//for landsat 5
+var calculateNBR5 = function(image) {
+  return image.select('SR_B4') // NIR
+              .subtract(image.select('SR_B5')) // SWIR
+              .divide(image.select('SR_B4').add(image.select('SR_B5'))) // NIR plus SWIR
+              .rename('NBR');
+};
+
+
+// Berechne NBR für jede Bildsammlung
+var preNBR_L5 = calculateNBR5(preFireImage_L5);
+var postNBR_L5 = calculateNBR5(postFireImage_L5);
+
+
+// NBR für Punkte der Geometrie berechnen
+var calculateNBRForPoints = function(nbrImage) {
+  return geometry.map(function(feature) {
+    var pointNBR = nbrImage.reduceRegion({
+      reducer: ee.Reducer.mean(),
+      geometry: feature.geometry(),
+      scale: 30, // Skala anpassen, je nach Bedarf
+      bestEffort: true
+    });
+    return feature.set('NBR', pointNBR.get('NBR'));
+  });
+};
+
+// Berechnen Sie NBR für die Punkte in der Geometrie
+var preNBRPoints_L5 = calculateNBRForPoints(preNBR_L5);
+var postNBRPoints_L5 = calculateNBRForPoints(postNBR_L5);
+
+// Ergebnisse in der Konsole anzeigen
+print('NBR vor dem Brand (Landsat 5):', preNBRPoints_L5);
+print('NBR nach dem Brand (Landsat 5):', postNBRPoints_L5);
+
