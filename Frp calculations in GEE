@@ -1,0 +1,36 @@
+// import plot coordinates
+var points = ee.FeatureCollection('projects/en22-pv-canada/assets/1kmKoordinaten_shapefile'); // ersetze durch deinen tatsächlichen Pfad
+//var points = ee.FeatureCollection('projects/ee-piavoitz/assets/buffer4km'); // ersetze durch deinen tatsächlichen Pfad
+//var points = ee.FeatureCollection('projects/ee-piavoitz/assets/buffer13km'); // ersetze durch deinen tatsächlichen Pfad
+//var points = ee.FeatureCollection('projects/ee-piavoitz/assets/buffer17km'); // ersetze durch deinen tatsächlichen Pfad
+//var points = ee.FeatureCollection('projects/ee-piavoitz/assets/buffer33km'); // ersetze durch deinen tatsächlichen Pfad
+//var points = ee.FeatureCollection('projects/ee-piavoitz/assets/buffer47km'); // ersetze durch deinen tatsächlichen Pfad
+//var points = ee.FeatureCollection('projects/ee-piavoitz/assets/buffer73km'); // ersetze durch deinen tatsächlichen Pfad
+
+// MODIS Fire Radiative Power (FRP) ImageCollection 
+var fireData = ee.ImageCollection('MODIS/061/MOD14A1')
+    .filterDate('2017-01-01', '2017-12-31'); // Ersetze durch dein Datum
+
+// calculate maximum value
+var frpImage = fireData.max(); // Beispiel: Mittelwert über den Zeitraum
+
+// project MODIS to EPSG:4326
+var reprojectedFrpImage = frpImage.reproject({
+  crs: 'EPSG:4326',    // Zielprojektion
+  scale: 500           // Auflösung von 500 Metern (entsprechend MODIS)
+});
+
+// project dots to EPSG:4326
+var pointsReprojected = points.map(function(feature) {
+  return feature.transform(ee.Projection('EPSG:4326'), 1); // '1' ist die Auflösung
+});
+
+// Calculate Frp value
+var frpAtPoints = reprojectedFrpImage.reduceRegions({
+  collection: pointsReprojected, // die umprojizierten Punkte
+  reducer: ee.Reducer.mean(),    // Berechnung des Mittelwertes der FRP-Werte an den Punkten
+  scale: 500                     // Passende Skala für MODIS (500 Meter)
+});
+
+// show
+print('FRP-Werte an den Punkten:', frpAtPoints);
